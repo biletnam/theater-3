@@ -1,0 +1,542 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Театральный сервер Ивана Ивановича</title>
+    <link href="jquery/css/smoothness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+    <script src="jquery/jquery-1.7.1.min.js"></script>
+    <script src="jquery/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/md5.js"></script>
+    <script src="js/driver.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/formvalidator.js"></script>
+    <script src="js/flowplayer.min.js"></script>
+    <script src="js/functions.js"></script>
+    <style type="text/css">
+		.mainTable {
+			width: 100%;
+		}
+		.mainContent {
+			-moz-border-radius: 10px;
+			-webkit-border-radius: 10px;
+			border-radius: 10px;
+			background-color: #FFFFCC;
+			border: thin solid #FFFF66;
+			-moz-box-shadow: 0 0 10px rgba(1,1,0,0.5);
+			-webkit-box-shadow: 0 0 10px rgba(1,1,0,0.5);
+			box-shadow: 0 0 10px rgba(1,1,0,0.5);
+			xxxfilter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#808000, strength=4);
+		}
+		body {
+			background: #c0ffff;
+			font-family: verdana, tahoma, arial, sans-serif, Lucida Sans;
+			font-size: 12px;
+			font-weight: normal;
+			line-height: 20px;
+		}
+		.menuBlock 
+		{
+		}
+		.menuBlock h1 
+		{
+		}
+		h1 {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: x-large;
+			font-weight: bold;
+			font-style: normal;
+			font-variant: normal;
+			text-transform: none;
+			color: #000080;
+			text-align: center;
+			padding: 20px 0px 20px 0px;
+		}
+		h2 {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: large;
+			font-weight: bold;
+			font-style: normal;
+			font-variant: normal;
+			text-transform: none;
+			color: #000080;
+			text-align: center;
+			padding: 20px 0px 20px 0px;
+		}
+		.loginInfo {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: smaller;
+			font-weight: normal;
+			font-style: normal;
+			font-variant: normal;
+			text-transform: none;
+			color: #000080;
+			text-align: right;
+			padding: 20px 0px 20px 0px;
+		}
+		.formBlock {
+			-moz-border-radius: 10px;
+			-webkit-border-radius: 10px;
+			border-radius: 10px;
+			border: solid 1px black;
+			background-color: white;
+			-moz-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+			-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+			box-shadow: 0 0 10px rgba(0,0,0,0.5);
+			xxxfilter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=4);
+			text-align: center;
+			padding: 16px;
+		}
+        .videoBlock {
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            border: solid 1px black;
+            background-color: white;
+            -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            xxxfilter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=4);
+            text-align: center;
+            padding: 16px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+		input[type='text'], input[type='password'] {
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+			background: #e0ffff;
+			font-family: tahoma, arial, verdana, sans-serif, Lucida Sans;
+			font-size: 12px;
+			font-weight: bold;
+			line-height: 20px;
+			padding: 0 6px;
+			text-align: center;
+			vertical-align: middle;
+		}
+		input[type='submit'] {
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+			background: #408080;
+			font-family: tahoma, arial, verdana, sans-serif, Lucida Sans;
+			font-size: 12px;
+			font-weight: bold;
+			color: White;
+			line-height: 20px;
+			padding: 6px 24px;
+			text-align: center;
+			vertical-align: middle;
+		}
+		.VKButton, .FBButton {
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+			color: White;
+			line-height: 14px;
+			cursor: pointer;
+			white-space: nowrap;
+			font-size: 12px;
+			font-weight: bold;
+			line-height: 20px;
+			padding: 6px 16px;
+			text-align: center;
+			vertical-align: middle;
+			width: 100%;
+		}
+		.VKButton {
+			background: #45688E;
+			font-family: tahoma, arial, verdana, sans-serif, Lucida Sans;
+		}
+		.FBButton {
+			background-color: #5b74a8;
+			font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+		}
+		.overlap {
+			display: none;
+		}
+		.errorMessageBig {
+			color: Red;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: large;
+			font-weight: bold;
+			font-style: normal;
+			font-variant: normal;
+			text-transform: none;
+			text-align: center;
+			padding: 20px 0px 20px 0px;
+		}
+        .navPanel 
+        {
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            border: solid 1px blue;
+            text-align: center;
+            font-family: Verdana, Tahoma, Arial;
+            font-size: small;
+            font-weight:normal;
+            color:Blue;
+            background-color:#f0f0ff;
+            xxmargin:5px;
+            xxpadding: 10px;
+        }
+		.ulLevel0 
+		{
+			text-align: left;
+			list-style-type:none;
+			list-style-position: outside;
+			padding:0; margin:0;
+		}
+		.liLevel0 
+		{
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+			border: solid 1px blue;
+			text-align: center;
+			font-family: Verdana, Tahoma, Arial;
+			font-size: x-large;
+			font-weight:bold;
+			font-stretch:wider;
+			font-style:normal;
+			color:Blue;
+			background-color:#f0f0ff;
+			margin-bottom:20px;
+			padding: 10px;
+		}
+		.liSpanLevel0 
+		{
+			text-align: left;
+		}
+		.ulLevel1
+		{
+			text-align: left;
+			list-style-type:none;
+			list-style-position: outside;
+			padding:0; margin:0;
+		}
+		.liLevel1 
+		{
+			font-family: Verdana, Tahoma, Arial;
+			font-size:medium;
+			font-weight:bold;
+			font-stretch:wider;
+    		font-style:normal;
+			color:black;
+			margin-top:20px;
+			text-align: left;
+		}
+		.liSpanLevel1 
+		{
+			text-align: left;
+		}
+		.ulLevel2
+		{
+			text-align: left;
+			list-style-type:none;
+			list-style-position: outside;
+			padding:0; margin:0;
+		}
+		.liLevel2 
+		{
+			font-family: Verdana, Tahoma, Arial;
+			font-size:medium;
+			font-weight:normal;
+			font-stretch:wider;
+			font-style:normal;
+			color:black;
+			text-align: left;
+		}
+		.liLevel2 table 
+		{
+			text-align:left;
+			border-bottom:dotted 1px gray;
+		}
+		.liLevel2 td 
+		{
+			vertical-align:top;
+		}
+		.oddLine
+		{
+		}
+		.evenLine
+		{
+		}
+		.perfComment 
+		{
+			font-size:smaller;
+		}
+		.perfName
+		{
+			font-size:medium;
+		}
+		.player 
+		{
+			display:block;
+			width:425px;
+			height:300px;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+			border: solid 3px #8e3184;
+			background: #d2c14e url('img/playerIcon.png') no-repeat;
+
+			-moz-box-shadow: 0 0 10px rgba(142,139,132,0.5);
+			-webkit-box-shadow: 0 0 10px rgba(142,139,132,0.5);
+			box-shadow: 0 0 10px rgba(142,139,132,0.5);
+			xxxfilter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#8e3184, strength=4);
+		}
+    </style>
+    
+    <!-- meta name="google-translate-customization" content="99c063501bd939da-ec56306e9e8f54f3-g6bb754c54e02f42b-e" -->
+    
+  </head>
+  <body>
+    <table class="mainTable" border=0>
+      <tr>
+        <td width=10% >&nbsp;</td>
+
+        <td width=80% align="right" >
+
+        	<div id="google_translate_element"></div>
+        <script type="text/javascript">
+			function googleTranslateElementInit() {
+				new google.translate.TranslateElement({
+					pageLanguage : 'ru',
+					layout : google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+					autoDisplay : false
+				}, 'google_translate_element');
+			}
+        </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+        </td>
+
+        <td width=10% class=loginInfo> &nbsp;<span id=loginInfo style="display:none">Вы вошли под именем <span id="usernameInfo"></span>
+          <br />
+          <a href="javascript:void(0)" onclick="logout(); return false">Выйти</a></span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td class="mainContent">
+        
+        <h1>Театральный сервер 
+        <img align="absmiddle" id="inProgressSmall" src="img/loading.gif" border="0" width="32" height="32"/>
+        Ивана Ивановича</h1>
+
+        <center>
+          <table id="mainMenu" style="display:none" border=0 width=100% >
+            <tr>
+              <td align="center" valign="middle" >
+              	<a href="javascript:void(0)" onclick="onMenuNews(); return false" class="mainMenuItem">Новости</a>
+              	&nbsp;
+              	<a href="javascript:void(0)" onclick="onMenuRecords(); return false" class="mainMenuItem">Спектакли</a>
+              	&nbsp;
+              	<a href="javascript:void(0)" onclick="onMenuGuesbook(); return false" class="mainMenuItem">Гостевая книга</a>
+<!--
+              	&nbsp;
+              	<a href="javascript:void(0)" onclick="onMenuProfile(); return false" class="mainMenuItem">Ваш профиль</a>
+-->
+              </td>
+            </tr>
+          </table>
+        </center>
+        <hr />
+        
+        <table id="welcomeBlock" width=100% class="overlap">
+          <tr>
+            <td><h1>Добро пожаловать!</h1></td>
+          </tr>
+          <tr><td class=formBlock >
+            <h2>Новости:</h2>
+            <div id="news" style="text-align:left"></div>
+          </td></tr>
+        </table>
+        <table id="performancesBlock" width=100% class="overlap" >
+          <tr>
+            <td align="center"><span id="cantLoadPerformancesMsg" class="errorMessageBig">Ошибка при обращении к серверу!</span>
+            <table id="performancesContent" border=0 width=100%>
+              <tr>
+                <td class="formBlock">
+                
+                <!-- 
+                  <span>Группировать по:
+                  <input type="radio" name="sortPerformancesMode" id="sortByYears" value="sortByYears" onclick="showPerfByYears()"/>
+                  <label for="sortByYears">по хронологии</label>
+                  <input type="radio" name="sortPerformancesMode" id="sortByTheaters" value="sortByTheaters" onclick="showPerfByTheaters()"/>
+                  <label for="sortByTheaters">по театрам</label>
+                  </span>
+                -->
+                                     
+                  <table width=100% border="0"><tr>
+                  	<td width=15% valign="top">
+                  		<table width=100% class="navPanel" cellpadding="4" id="navPanel">
+                  			<tr><td colspan=2 align=center style="color: black">Навигатор<hr></td></tr>
+                  		    <tr>
+                  			   <td valign="middle" style="border-right: solid 1px black"><div id="listOfTheaters"></div></td>
+                  			   <td valign="middle"><div id="listOfYears"></div></td>
+                  		    </tr>
+                  		</table>
+                	</td>
+                  	<td width=70% valign="top"><div id="listOfperformances" width=100% align="left"></div></td>
+                  </tr></table>
+                  </td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+
+
+<table id="mediaFilesBlock" width="100%" class="overlap">
+    <tr>
+        <td align="center">
+            <div id="cantLoadFileList" class="errorMessageBig">Ошибка при обращении к серверу!</div>
+            <table id="mediaHeaderBlock" style="margin-bottom: 20px" class="" border=0>
+                <tr>
+                    <td>
+                        <h1 id="mediaPerfName" style="padding-bottom: 0px"></h1>
+                        <p id="mediaPerfComment"></p>
+                    </td>
+                </tr>
+                <tr><td align=left>
+                    Раздел: <span id="mediaTheaterName"></span><br>
+                    Год записи: <span id="mediaYear"></span>
+                </td></tr>
+            </table>
+            <table id="videoBlock" class="videoBlock" width=100%>
+                <tr>
+                    <td align="center" valign="middle">
+                        <h2>Видео</h2>
+                        <table>
+                            <tr>
+                                <td width="50%">
+                                	<table><tr><td align=right>
+                                    <span id="videoFileList"></span>
+                                    </td></tr></table>
+                                </td>
+                                <td width="50%">
+                                    <div id="playerPlaceHolder" class="player" src="img/playerIcon.png">
+                                        <a href="" id="player"></a>
+                                        <div id="wmvPlayed"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table id="photoBlock" class="videoBlock" width=100%>
+                <tr>
+                    <td>
+                    	<div id="photoAlbumLink">
+                    		<h2><a href="javascript:void(0)" onclick="showPhotoAlbum(); return false">Фотоальбом</a></h2>
+                    	</div>
+                    	<div id="photoAlbumContent">
+                            <h2>Фотоальбом</h2>
+                            <span id="photoFileList"></span>
+                            <div id=enlargedPhoto style="position: relative">
+                            	<img width=100% style="min-height: 100px; min-width: 100px">
+                            	<img id=enlargedPhotoLoading style=" position: absolute;top:10px;left:10px" src="img/loading.gif">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table id="perfCommentBlock" class="videoBlock" width=100%>
+                <tr>
+                    <td align="center">
+                        <h2 class="postMsg"></h2>
+                        <form action="javascript:void(0)" onsubmit="onSubmitPerfComment();return false">
+                        <h2>Напишите отзыв об этом спектакле:</h2>
+                        <textarea name="comment" style="width: 75%" rows="10"></textarea><br />
+                        <input type="submit" name="submit" value="Отправить" />
+                        </form>
+                        <hr />
+                    </td>
+                </tr>
+                <tr>
+                    <td><h2 class="commentTitle">Коментарии</h2></td>
+                </tr>
+                <tr>
+                    <td class="list" align="left"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+        <table id="guestbook" width=100% class="overlap" >
+          <tr>
+            <td align="center"><span class="errorMessageBig">Ошибка при обращении к серверу!</span>
+            <table border=0 width=100%>
+              <tr><td align=center >
+                <h2 class=postMsg></h2>
+                <form action="javascript:void(0)" onsubmit="onSubmitGuestbook();return false">
+                <h2>Оставьте запись в гостевой книге:</h2>
+                <textarea name=comment style="width:75%" rows=10></textarea><br />
+                <input type=submit name=submit value="Отправить" />
+                </form>
+                <hr />
+              </td></tr>
+              <tr><td><h2>Отзывы посетителей</h2></td></tr>
+              <tr>
+                <td class="formBlock list" align=left>
+                </td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+
+
+        <form id="loginForm" class="overlap">
+          <center>
+            <table class="formBlock">
+              <tr>
+                <td>
+                <table border=0 cellpadding=10px>
+                  <tr>
+                    <td align="right" width=50%>Имя пользователя:</td>
+                    <td width=50% align="left"><input type="text" name="username" /></td>
+                  </tr>
+                  <tr>
+                    <td align="right">Пароль:</td>
+                    <td align="left"><input type="password" name="password" /></td>
+                  </tr>
+                  <tr>
+                    <td colspan=2 align="center">
+                    <input type="submit" value="Вход" />
+                    </td>
+                  </tr>
+                  <!--
+                  <tr><td colspan=2 align=center><a href="javascript:void(0)">Регистрация</a></td></tr>
+                  -->
+                  <tr>
+                    <td colspan=2>
+                    <hr />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="middle">
+                    <input type="button" value="Вход через ВКонтакте" class="VKButton" onclick="location='vktheater.php'" />
+                    </td>
+                    <td align="center" valign="middle">
+                    <input type="button" value="Вход через Facebook" class="FBButton" onclick="location='fbtheater.php'"/>
+                    </td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table>
+          </center>
+        </form></td>
+        <td> &nbsp;</td>
+      </tr>
+      <tr>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+      </tr>
+    </table>
+  </body>
+</html>

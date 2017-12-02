@@ -1,0 +1,211 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>II admin</title>
+	<link href="jquery/css/smoothness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+	<script src="jquery/jquery-1.7.1.min.js"></script>
+	<script src="jquery/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/md5.js"></script>
+	<script src="js/driver.js"></script>
+	<script src="js/functions.js"></script>
+	<script src="js/jquery.validate.min.js"></script>
+    <script src="js/formvalidator.js"></script>
+</head>
+<body>
+
+
+<div class="ui-widget-content ui-corner-all" style="margin:10px 5% 10px 5%;background:#e0e0ff;text-align:center">
+<table border=0 width=100% >
+<tr><td width=30%>.</td><td width=70%>.</td></tr>
+<tr><td colspan=2><h1>Админка Ивана Иваныча</h1></td></tr>
+<tr>
+<td valign=top>
+
+<ul id=mainmenu>
+<li><a href=# name=login>Авторизация</a></li>
+<li><a href=# name=theaters>Список театров</a></li>
+<li><a href=# name=performances>Список спектаклей</a></li>
+<li><a href=# name=users>Список пользователей</a></li>
+</ul>
+
+</td>
+<td valign=top>
+
+<div id=overlaps class="ui-widget-content ui-corner-all" style="width:100%">
+
+<div name="login">
+
+<form id=formLogin>
+<table>
+<tr>
+<td>User:</td>
+<td><input type="text" class="username" id="username" name="username"></td>
+</tr><tr>
+<td>Пароль:</td>
+<td><input type="password" calss="password" id="password" name="password"></td>
+</tr>
+</table>
+<input type="submit" name="sumbit" value="Вход">
+<p class=msg></p>
+</form>
+    
+</div>
+
+<div name="theaters">
+
+
+<h2>Список театров</h2>
+<input type=button onclick="newTheater()" value="Новый театр" />
+<div id=listOfTheaters></div>
+<input type=button onclick="newTheater()" value="Новый театр" />
+
+</div>
+
+<div name="users">
+
+<h2>Список пользователей</h2>
+<input type=button onclick="newUser()" value="Новый пользователь" />
+<div id=listOfUsers></div>
+<input type=button onclick="newUser()" value="Новый пользователь" />
+
+</div>
+
+<div name="performances">
+<h2>Список спектаклей<span id=theaterForPerformances></span></h2>
+<input type=button onclick="newPerformance()" value="Новый спектакль" />
+<div id=listOfPerformances></div>
+<input type=button onclick="newPerformance()" value="Новый спектакль" />
+</div>
+
+<div name="movies">
+<h2>Список медиафайлов<span id=performanceForMovies></span></h2>
+<input type=button onclick="newMovie()" value="Добавить медиафайл" />
+<input type=button onclick="importMediaFolder()" value="Импортировать директорий" />
+<div id=listOfMovies></div>
+<input type=button onclick="newMovie()" value="Добавить медиафайл" />
+<input type=button onclick="importMediaFolder()" value="Импортировать директорий" />
+</div>
+
+
+</div> <!-- overlaps -->
+
+</td>
+</tr>
+</table>
+</div>
+
+
+<div id=divEditTheater class=dialogForm>
+
+<form id=formEditTheater>
+<table>
+<tr>
+<td>Id:</td><td><input type="text" name="id" class="theaterId" readonly="readonly" disabled=disabled></td>
+</tr></tr>
+<td>Sub URL:</td><td><input type="text" name="url" class="subUrl" ></td>
+</tr></tr>
+<td>Название:</td><td><textarea name="name" class="title" cols=60 rows=5></textarea></td>
+</tr>
+</table>
+<input type="submit" name="sumbit" value="OK">
+</form>
+
+</div>
+
+<div id=divEditUser class=dialogForm>
+
+<form id=formEditUser>
+<table>
+<tr>
+<td>Id:</td><td><input type="text" name="id" class="theaterId" readonly="readonly" disabled=disabled></td>
+</tr></tr>
+<td>Sub URL:</td><td><input type="text" name="url" class="subUrl" ></td>
+</tr></tr>
+<td>Читаемое имя:</td><td><input type="text" name="name" class="username" ></td>
+</tr></tr>
+<td>Логин:</td><td><input type="text" name="login" class="username" ></td>
+</tr></tr>
+<td>Пароль:</td><td><input type="text" name="password" class="password" ></td>
+</tr></tr>
+<td>vk:</td><td><input type="text" name="vk" class="vk" ></td>
+</tr></tr>
+<td>fb:</td><td><input type="text" name="fb" class="fb" ></td>
+</tr></tr>
+<td>Комментарий:</td><td><textarea name="comment" class="comment" cols=60 rows=5></textarea></td>
+</tr>
+</table>
+<input type="submit" name="sumbit" value="OK">
+</form>
+
+</div>
+
+<div id=divEditPerformance class=dialogForm>
+
+<form id=formEditPerformance>
+<table>
+<tr>
+<td>Id:</td><td><input type="text" name="id" class="theaterId" readonly="readonly" disabled=disabled></td>
+</tr></tr>
+<td>Sub URL:</td><td><input type="text" name="url" class="subUrl" ></td>
+</tr></tr>
+<td>Название:</td><td><textarea name="name" class="comment" cols=60 rows=2></textarea></td>
+</tr></tr>
+<td>Театр:</td><td><select type="text" name="theater" class="theaterId" ></select></td>
+</tr></tr>
+<td>Год:</td><td><input type="text" name="year" class="year" ></td>
+</tr></tr>
+<td>Комментарий:</td><td><textarea name="comment" class="comment" cols=60 rows=5></textarea></td>
+</tr>
+</table>
+<input type="submit" name="sumbit" value="OK">
+</form>
+
+</div>
+
+<div id=divEditMovie class=dialogForm>
+
+<form id=formEditMovie>
+<table>
+<tr>
+<td>Id:</td><td><input type="text" name="id" class="theaterId" readonly="readonly" disabled=disabled></td>
+</tr></tr>
+<td>Sub URL:</td><td><input type="text" name="url" class="subUrl" ></td>
+</tr></tr>
+<td>Спектакль:</td><td><input type="text" name="performance" class="theaterId" readonly="readonly" disabled=disabled></td>
+</tr></tr>
+<td>Название:</td><td><textarea name="name" class="comment" cols=60 rows=2></textarea></td>
+</tr></tr>
+<td>Файл:</td><td><input type="text" name="file" class="" ><input type="button" onclick="selectMovieFile()" value="..."/></td>
+</tr></tr>
+<td>Тип:</td><td><input type="text" name="type" class="" ></td>
+</tr></tr>
+<td>Порядок:</td><td><input type="text" name="playorder" class=""></td>
+</tr>
+</table>
+<input type="submit" name="sumbit" value="OK">
+</form>
+
+</div>
+
+<div id=selectFileDlg class=dialogForm>
+<h1 id=selectFileDlg_CurrDir></h1>
+<table border=1>
+<tr><td id=selectFileDirs valign=top></td><td id=selectFileFiles valign=top></td></tr>
+</table>
+</div>
+
+<div id=selectDirDlg class=dialogForm>
+<h1 id=selectDirDlg_CurrDir></h1>
+<form id=selectDirForm>
+<table><tr><td id=selectDirDirs></td></tr></table>
+<input type="submit" name="sumbit" value="OK">
+</form>
+</div>
+
+<div id=OperationInProgressDlg>
+<img src="img/loading.gif" />
+</div>
+
+
+</body>
+</html>
